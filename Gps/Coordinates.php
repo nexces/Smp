@@ -1,12 +1,12 @@
 <?php
 
-
-/*
- * Type   Dir.   Sign    Test
- * Lat.   N      +       > 0
- * Lat.   S      -       < 0
- * Long.  E      +       > 0
- * Long.  W      -       < 0
+/**
+ * Smp_Gps_Coordinates enables developers to convert between different coordinate systems
+ *
+ * @category  Smp
+ * @package   Smp_Gps_Coordinates
+ * @license   https://github.com/nexces/Smp/blob/master/LICENSE.txt    BSD License
+ * @author    Adrian 'Nexces' Piotrowicz / adrianp
  */
 class Smp_Gps_Coordinates {
 
@@ -28,9 +28,9 @@ class Smp_Gps_Coordinates {
      */
     const FORMAT_MINDEC = 12;
 
-    const MARK_DEG = '°';
-    const MARK_MIN = '\'';
-    const MARK_SEC = '"';
+    const SIGN_DEG = '°';
+    const SIGN_MIN = '\'';
+    const SIGN_SEC = '"';
 
     private $latitude;
     private $longitude;
@@ -232,7 +232,7 @@ class Smp_Gps_Coordinates {
     {
         $decimal = abs($decimal);
 
-        $dms = (int) $decimal . self::MARK_DEG;
+        $dms = (int) $decimal . self::SIGN_DEG;
 
         if ((string) ((int) $decimal) == (string) $decimal) {
             return $dms;
@@ -240,7 +240,7 @@ class Smp_Gps_Coordinates {
 
         $minutes = ($decimal - (int) $decimal) * 60;
 
-        $dms .= '' . str_pad((int) ($minutes), 2, '0', STR_PAD_LEFT) . self::MARK_MIN;
+        $dms .= '' . str_pad((int) ($minutes), 2, '0', STR_PAD_LEFT) . self::SIGN_MIN;
 
         if ((string) ((int) $minutes) == (string) $minutes) {
             return $dms;
@@ -248,7 +248,7 @@ class Smp_Gps_Coordinates {
 
         $seconds = ($minutes - (int) $minutes) * 60;
 
-        $dms .= '' . number_format($seconds, 3)  . self::MARK_SEC;
+        $dms .= '' . number_format($seconds, 3)  . self::SIGN_SEC;
 
 
         return (string) $dms;
@@ -263,7 +263,7 @@ class Smp_Gps_Coordinates {
     {
         $decimal = abs($decimal);
 
-        $dms = (int) $decimal . self::MARK_DEG;
+        $dms = (int) $decimal . self::SIGN_DEG;
 
         if ((string) ((int) $decimal) == (string) $decimal) {
             return $dms;
@@ -271,7 +271,7 @@ class Smp_Gps_Coordinates {
 
         $minutes = ($decimal - (int) $decimal) * 60;
 
-        $dms .= '' . str_pad(number_format($minutes, 6), 9, '0', STR_PAD_LEFT) . self::MARK_MIN;
+        $dms .= '' . str_pad(number_format($minutes, 6), 9, '0', STR_PAD_LEFT) . self::SIGN_MIN;
 
         return (string) $dms;
     }
